@@ -1,10 +1,10 @@
 # AGENTS.md
 
-Instructions for AI agents working with the HeroUI v3 repository.
+Instructions for AI agents working with the wikialisa v3 repository.
 
 ## Repository Overview
 
-HeroUI v3 is a modern React UI library built with **Tailwind CSS v4**, organized as a **pnpm monorepo** managed by **Turborepo**. Components are built on top of [React Aria Components](https://react-spectrum.adobe.com/react-aria/) and follow a compound component pattern similar to Radix UI.
+wikialisa v3 is a modern React UI library built with **Tailwind CSS v4**, organized as a **pnpm monorepo** managed by **Turborepo**. Components are built on top of [React Aria Components](https://react-spectrum.adobe.com/react-aria/) and follow a compound component pattern similar to Radix UI.
 
 ### Tech Stack
 
@@ -30,17 +30,17 @@ Use the workspace manifests and lockfile as the source of truth for exact depend
 ├── apps/
 │   └── docs/              # Documentation site (Next.js + Fumadocs)
 ├── packages/
-│   ├── react/             # Main UI library (@heroui/react)
+│   ├── react/             # Main UI library (@wikialisa/react)
 │   │   ├── src/components/  # All components
 │   │   ├── src/utils/       # Shared utilities
 │   │   └── scripts/         # Build & codegen scripts
-│   ├── styles/            # CSS styles & variants (@heroui/styles)
+│   ├── styles/            # CSS styles & variants (@wikialisa/styles)
 │   │   ├── components/      # Per-component .css files (flat, e.g. button.css)
 │   │   ├── themes/          # Theme variables
 │   │   └── src/components/  # Per-component .styles.ts (tailwind-variants)
 │   ├── standard/          # Shared ESLint, Prettier, TS configs
 │   ├── storybook/         # Storybook configuration
-│   └── testing/           # Shared test harness (@heroui/testing)
+│   └── testing/           # Shared test harness (@wikialisa/testing)
 ├── turbo.json
 └── pnpm-workspace.yaml
 ```
@@ -59,30 +59,30 @@ Use the workspace manifests and lockfile as the source of truth for exact depend
 | Lint | `pnpm lint` |
 | Typecheck | `pnpm typecheck` |
 | Test all (jsdom + browser) | `pnpm test` |
-| Test one file (filter) | `pnpm --filter @heroui/react exec vitest run button` |
+| Test one file (filter) | `pnpm --filter @wikialisa/react exec vitest run button` |
 | Test with coverage | `pnpm test:coverage` (jsdom floors only — not “done”) |
-| Test changed files (local) | `pnpm --filter @heroui/react test:changed` (jsdom only; not a gate) |
+| Test changed files (local) | `pnpm --filter @wikialisa/react test:changed` (jsdom only; not a gate) |
 | Check formatting | `pnpm run format` |
 | Fix formatting | `pnpm run format:fix` |
 | Bump version | `pnpm version:bump` |
 | Scaffold a new component | `cd packages/react && pnpm add:component ComponentName` |
 
-## Behavioral tests (`@heroui/react`)
+## Behavioral tests (`@wikialisa/react`)
 
 - Suites live in `packages/react/tests/components/<name>/`:
   - `*.test.tsx` — jsdom (~90% of contracts)
   - `*.ssr.test.tsx` — Client SSR smoke via `ssrSmoke()` (not RSC)
   - `*.browser.test.tsx` — Playwright (overlays + high-risk portals; not every component)
   - optional `fixtures.tsx` — shared JSX across layers
-- Import harness from `@heroui/testing/helpers` (`render`, `setupUser`, `runAllTimers`, `ssrSmoke`, `User`). Browser suites: `render` from `@heroui/testing/browser` (wraps `vitest-browser-react`; owned by `@heroui/testing`). Prefer `@/` for sources. Pattern testers: `const user = new User(...); user.createTester(...)` — not a top-level export.
+- Import harness from `@wikialisa/testing/helpers` (`render`, `setupUser`, `runAllTimers`, `ssrSmoke`, `User`). Browser suites: `render` from `@wikialisa/testing/browser` (wraps `vitest-browser-react`; owned by `@wikialisa/testing`). Prefer `@/` for sources. Pattern testers: `const user = new User(...); user.createTester(...)` — not a top-level export.
 - Query: `getByRole` / label / text first; `data-testid` when needed; avoid class-primary queries.
-- Assert: roles/names, HeroUI `data-*` hooks, callbacks, focus, light BEM + documented `data-slot` on compound parts — not colors, full class lists, or RAC internals.
+- Assert: roles/names, wikialisa `data-*` hooks, callbacks, focus, light BEM + documented `data-slot` on compound parts — not colors, full class lists, or RAC internals.
 - Fake timers: per-suite only; wire `advanceTimers` into `setupUser` + `User`; use `runAllTimers()`.
 - Pattern testers for groups / overlays / collections; skip for Button / Checkbox / Switch / TextField.
 - Naming: `describe("Component")`; nested concern; `it` as `supports…` / `calls…` / `exposes…` / `renders…`. SSR: `"Component SSR"`; browser: `"Component (browser)"`.
 - Intentional skips (no dedicated suite required): internals (`rac`, `icons`), non-exported helpers (`color-input-group`, `date-input-group`), in-progress `calendar-year-picker`, parent-covered parts (`list-box-item`, `menu-item`, `menu-section`, `list-box-section`), Toast SSR (client portal only — covered by jsdom + browser). Public `input-group` has its own suite. SSR and browser are risk-based, not universal.
-- Browser setup (once locally): `pnpm --filter @heroui/testing exec playwright install chromium` before `pnpm test`. PR QA installs Chromium with `pnpm --filter @heroui/testing exec playwright install --with-deps chromium`, then runs `pnpm test:browser` + `pnpm test:coverage`. Release CI installs Chromium and runs `pnpm test`.
-- Commands: `pnpm test` (jsdom + browser, needs Chromium); filter with `pnpm --filter @heroui/react exec vitest run <name>`.
+- Browser setup (once locally): `pnpm --filter @wikialisa/testing exec playwright install chromium` before `pnpm test`. PR QA installs Chromium with `pnpm --filter @wikialisa/testing exec playwright install --with-deps chromium`, then runs `pnpm test:browser` + `pnpm test:coverage`. Release CI installs Chromium and runs `pnpm test`.
+- Commands: `pnpm test` (jsdom + browser, needs Chromium); filter with `pnpm --filter @wikialisa/react exec vitest run <name>`.
 - Coverage (`pnpm test:coverage`): jsdom only; `src/components/**` minus barrels. Thresholds are **CI floors** (statements/lines can pass with thin smoke). Green coverage ≠ sufficient depth — still require role/callback/focus (and browser for high-risk portals). Browser suites contribute **nothing** to the coverage number, so a component can be well covered by Playwright and still read as a gap in the report.
 - Floors are a **ratchet**: they sit ~1pt under the current measured run. Raise them when coverage improves; never lower them to make a red build pass.
 - `test:changed`: local jsdom-only shortcut (`vitest related --changed`). Does **not** run browser suites; never use it as the merge gate — use `pnpm test` / CI.
@@ -135,7 +135,7 @@ component-name/
 └── index.ts                    # Barrel exports
 ```
 
-Styling lives in `@heroui/styles`, split across two locations:
+Styling lives in `@wikialisa/styles`, split across two locations:
 
 | Path | Contents |
 |---|---|
@@ -158,7 +158,7 @@ The scaffold is a starting point and still emits legacy patterns. Before using t
 1. Move `<component-name>.styles.ts` to `packages/styles/src/components/<component-name>/`, replace utility-based variants with BEM class mappings, and use the existing `componentNameVariants` / `ComponentNameVariants` naming convention.
 2. Add that directory's `index.ts` and export it from `packages/styles/src/components/index.ts`.
 3. Create `packages/styles/components/<component-name>.css` and import it in `packages/styles/components/index.css`. Import shared primitives before components that override them.
-4. Update the component and React barrel to import/re-export variants from `@heroui/styles` instead of the generated local styles path.
+4. Update the component and React barrel to import/re-export variants from `@wikialisa/styles` instead of the generated local styles path.
 5. Replace generated `forwardRef` with React 19 ref-as-prop handling, use the appropriate React Aria primitive, and forward remaining DOM/ARIA/event props. Add documented `data-slot` hooks and follow the named compound export pattern below.
 6. Update Storybook examples and add behavioral tests, including SSR/browser coverage when the risk criteria above apply.
 
@@ -174,7 +174,7 @@ Development package exports point to source. Building produces `dist/`; it does 
 
 ### Compound Component Pattern
 
-HeroUI uses a compound component pattern. Each component exports its sub-parts so users can compose and style them independently.
+wikialisa uses a compound component pattern. Each component exports its sub-parts so users can compose and style them independently.
 
 ```tsx
 // Context shares state/styles across parts
@@ -229,16 +229,16 @@ export * from "./component-name";
 export {Component, type ComponentProps} from "./component";
 
 // Always export variants
-export {componentVariants, type ComponentVariants} from "@heroui/styles";
+export {componentVariants, type ComponentVariants} from "@wikialisa/styles";
 ```
 
 ### Styling Rules
 
 1. **Variant mappings go in `.styles.ts` files** under `packages/styles/src/components/` using `tv()` from `tailwind-variants`; BEM declarations go in `packages/styles/components/*.css`. Keep component styling out of implementation `.tsx` files.
-2. **Import from `tailwind-variants`**, never from `@heroui/standard`.
+2. **Import from `tailwind-variants`**, never from `@wikialisa/standard`.
 3. **Never use `twMerge` manually** — `tailwind-variants` already includes it.
 4. **Add `"use client"` directive** at the top of every component `.tsx` file.
-5. **Display names** follow: `HeroUI.ComponentName` or `HeroUI.Component.SubPart`.
+5. **Display names** follow: `wikialisa.ComponentName` or `wikialisa.Component.SubPart`.
 
 ### CSS / BEM Naming
 
@@ -336,7 +336,7 @@ Storybook is the primary dev workflow — run with `pnpm dev` (port 6006).
 
 ### Icon Library
 
-HeroUI uses **Iconify** with **gravity-ui** as the default icon set.
+wikialisa uses **Iconify** with **gravity-ui** as the default icon set.
 
 ## Documentation and External References
 
@@ -357,13 +357,13 @@ Source of truth: `packages/react/src/components/index.ts`. Keep this inventory a
 
 ## Non-obvious Gotchas
 
-1. **`pnpm i` runs docs typegen only** — The `postinstall` hook is just `pnpm typegen:docs`. It does **not** build `@heroui/styles` (and there is no `@heroui/docs-cn` package — Chinese docs live under `apps/docs`). Run `pnpm build` (or `pnpm --filter @heroui/styles build`) when you need `styles/dist/`, or rely on `pnpm test` / Turbo `^build`.
+1. **`pnpm i` runs docs typegen only** — The `postinstall` hook is just `pnpm typegen:docs`. It does **not** build `@wikialisa/styles` (and there is no `@wikialisa/docs-cn` package — Chinese docs live under `apps/docs`). Run `pnpm build` (or `pnpm --filter @wikialisa/styles build`) when you need `styles/dist/`, or rely on `pnpm test` / Turbo `^build`.
 
-2. **Build order matters** — `@heroui/styles` must build before `@heroui/react`. Running `pnpm build` from root handles this via Turbo's `^build` dependency.
+2. **Build order matters** — `@wikialisa/styles` must build before `@wikialisa/react`. Running `pnpm build` from root handles this via Turbo's `^build` dependency.
 
 3. **Native addons allowlist** — `onlyBuiltDependencies` in root `pnpm-workspace.yaml` allows native compilation for `esbuild`, `@swc/core`, `@parcel/watcher`, etc. If this list is missing, you'll see "Ignored build scripts" warnings.
 
-4. **Behavioral tests** — see [Behavioral tests](#behavioral-tests-herouireact) above. Harness lives in `@heroui/testing`; suites in `packages/react/tests/`.
+4. **Behavioral tests** — see [Behavioral tests](#behavioral-tests-wikialisareact) above. Harness lives in `@wikialisa/testing`; suites in `packages/react/tests/`.
 
 5. **Commit hooks** — Husky runs `lint-staged` on pre-commit and `commitlint` on commit-msg. Non-conforming commits are rejected.
 

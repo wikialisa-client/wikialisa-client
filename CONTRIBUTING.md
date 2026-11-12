@@ -1,8 +1,8 @@
-# HeroUI Contributing Guide
+# wikialisa Contributing Guide
 
-Hello!, I am very excited that you are interested in contributing with HeroUI. However, before submitting your contribution, be sure to take a moment and read the following guidelines.
+Hello!, I am very excited that you are interested in contributing with wikialisa. However, before submitting your contribution, be sure to take a moment and read the following guidelines.
 
-- [Code of Conduct](https://github.com/heroui-inc/heroui/blob/canary/CODE_OF_CONDUCT.md)
+- [Code of Conduct](https://github.com/wikialisa-inc/wikialisa/blob/canary/CODE_OF_CONDUCT.md)
 - [Reporting issues and feature requests](#reporting-issues-and-feature-requests)
 - [Tooling](#tooling)
 - [Commit Convention](#commit-convention)
@@ -20,31 +20,31 @@ Hello!, I am very excited that you are interested in contributing with HeroUI. H
 
 Before you open a new report, search for an existing answer so we can keep the tracker focused:
 
-- [Open pull requests](https://github.com/heroui-inc/heroui/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc)
-- [Open issues](https://github.com/heroui-inc/heroui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
-- [Closed issues](https://github.com/heroui-inc/heroui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
-- [Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Open pull requests](https://github.com/wikialisa-inc/wikialisa/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc)
+- [Open issues](https://github.com/wikialisa-inc/wikialisa/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+- [Closed issues](https://github.com/wikialisa-inc/wikialisa/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+- [Discussions](https://github.com/wikialisa-inc/wikialisa/discussions)
 
 ### Bug reports
 
-Use [GitHub Issues](https://github.com/heroui-inc/heroui/issues/new/choose) and select the **Bug report** template. Include your HeroUI version (not “latest”), clear steps to reproduce, expected vs actual behavior, and environment details (OS, browser). A minimal reproduction on [StackBlitz](https://stackblitz.com/) or a small public repo helps us fix bugs much faster than localhost-only setups.
+Use [GitHub Issues](https://github.com/wikialisa-inc/wikialisa/issues/new/choose) and select the **Bug report** template. Include your wikialisa version (not “latest”), clear steps to reproduce, expected vs actual behavior, and environment details (OS, browser). A minimal reproduction on [StackBlitz](https://stackblitz.com/) or a small public repo helps us fix bugs much faster than localhost-only setups.
 
-This repository is for **HeroUI v3** (`@heroui/react` and related packages in this monorepo). Report problems in other products in their own trackers:
+This repository is for **wikialisa v3** (`@wikialisa/react` and related packages in this monorepo). Report problems in other products in their own trackers:
 
 | Product | Where to report |
 | --- | --- |
-| HeroUI Pro | Pro Discord or support in the Pro dashboard |
-| HeroUI CLI | [heroui-cli issues](https://github.com/heroui-inc/heroui-cli/issues) |
-| HeroUI Native | [heroui-native issues](https://github.com/heroui-inc/heroui-native/issues) |
-| Tailwind Variants | [tailwind-variants issues](https://github.com/heroui-inc/tailwind-variants/issues) |
+| wikialisa Pro | Pro Discord or support in the Pro dashboard |
+| wikialisa CLI | [wikialisa-cli issues](https://github.com/wikialisa-inc/wikialisa-cli/issues) |
+| wikialisa Native | [wikialisa-native issues](https://github.com/wikialisa-inc/wikialisa-native/issues) |
+| Tailwind Variants | [tailwind-variants issues](https://github.com/wikialisa-inc/tailwind-variants/issues) |
 
 ### Feature requests
 
-We do not use GitHub Issues for new features or component ideas. Open a thread in [Feature requests](https://github.com/heroui-inc/heroui/discussions/categories/feature-requests) on Discussions instead. Describe the problem you are solving, your proposed API or UX, and any alternatives you considered. Maintainers prefer agreement on the approach in Discussions before large pull requests (see [Pull Request Guidelines](#pull-request-guidelines)).
+We do not use GitHub Issues for new features or component ideas. Open a thread in [Feature requests](https://github.com/wikialisa-inc/wikialisa/discussions/categories/feature-requests) on Discussions instead. Describe the problem you are solving, your proposed API or UX, and any alternatives you considered. Maintainers prefer agreement on the approach in Discussions before large pull requests (see [Pull Request Guidelines](#pull-request-guidelines)).
 
 ### Questions and ideas
 
-For troubleshooting, design questions, or open-ended ideas, use [Discussions](https://github.com/heroui-inc/heroui/discussions) or the [Discord community](https://discord.gg/9b6yyZKmH4). Use Issues only for confirmed bugs in this repo.
+For troubleshooting, design questions, or open-ended ideas, use [Discussions](https://github.com/wikialisa-inc/wikialisa/discussions) or the [Discord community](https://discord.gg/9b6yyZKmH4). Use Issues only for confirmed bugs in this repo.
 
 ## Tooling
 
@@ -108,7 +108,7 @@ You may use AI tools to help prepare a contribution. You are responsible for eve
 
 ### Steps to PR
 
-1. Fork of the heroui repository and clone your fork
+1. Fork of the wikialisa repository and clone your fork
 
 2. Create a new branch out of the `v3.x.x` branch. We follow the convention
    `[type/scope]`. For example `fix/dropdown-hook` or `docs/menu-typo`. `type`
@@ -116,9 +116,9 @@ You may use AI tools to help prepare a contribution. You are responsible for eve
    commit type. `scope` is just a short id that describes the scope of work.
 
 3. Make and commit your changes following the
-   [commit convention](https://github.com/heroui-inc/heroui/blob/main/CONTRIBUTING.md#commit-convention).
+   [commit convention](https://github.com/wikialisa-inc/wikialisa/blob/main/CONTRIBUTING.md#commit-convention).
    As you go, you can run `pnpm build --filter=<module>` and
-   `pnpm --filter @heroui/react exec vitest run <name>` e.g. `pnpm build --filter=@heroui/react && pnpm --filter @heroui/react exec vitest run avatar` to make sure everything works as expected.
+   `pnpm --filter @wikialisa/react exec vitest run <name>` e.g. `pnpm build --filter=@wikialisa/react && pnpm --filter @wikialisa/react exec vitest run avatar` to make sure everything works as expected.
 
    > To know more about the `--filter` option, please check the turborepo [docs](https://turborepo.org/docs/core-concepts/filtering).
 
@@ -145,7 +145,7 @@ We use [Turbo Repo](https://turborepo.org/) for the project management.
 2. If you will be working on the components source code, you can use the following command to start Storybook with Vite:
 
 ```bash
-## Start Storybook for HeroUI components
+## Start Storybook for wikialisa components
 pnpm dev
 
 ## optional — Storybook is also started by `pnpm dev`
@@ -154,10 +154,10 @@ pnpm dev:docs ## documentation next.js server; picks up component changes
 ```
 
 - If you will be working just on the documentation source code / mdx, you can use the following commands to build
-  HeroUI components and then start the next.js dev server:
+  wikialisa components and then start the next.js dev server:
 
 ```bash
-## Build HeroUI source components
+## Build wikialisa source components
 pnpm build
 
 ## Start the next.js documentation dev server
@@ -189,23 +189,23 @@ git checkout -b fix/something
 ### Tests
 
 All commits that fix bugs or add features need a behavioral test when they change interactive component contracts.
-See Behavioral tests in [`AGENTS.md`](AGENTS.md): query by role/label, use `setupUser()` from `@heroui/testing/helpers`, assert `data-*` state hooks and callbacks — not CSS pixels.
+See Behavioral tests in [`AGENTS.md`](AGENTS.md): query by role/label, use `setupUser()` from `@wikialisa/testing/helpers`, assert `data-*` state hooks and callbacks — not CSS pixels.
 
 ```bash
 # One-time local Playwright install (required before browser suites / `pnpm test`)
-pnpm --filter @heroui/testing exec playwright install chromium
+pnpm --filter @wikialisa/testing exec playwright install chromium
 
 # Local: jsdom + browser (needs Chromium installed)
 pnpm test
 
 # Filter by file name (e.g. button.test.tsx)
-pnpm --filter @heroui/react exec vitest run button
+pnpm --filter @wikialisa/react exec vitest run button
 
 # Coverage report (jsdom project + CI floors only — not a depth bar)
 pnpm test:coverage
 
 # Optional local shortcut: related jsdom tests for changed files (skips browser)
-pnpm --filter @heroui/react test:changed
+pnpm --filter @wikialisa/react test:changed
 ```
 
 CI (`QA` Test job) installs Chromium with `--with-deps`, then runs `test:browser` and `test:coverage` separately. Do not treat `test:changed` or coverage floors alone as “fully tested.”
@@ -243,7 +243,7 @@ Discuss new component proposals with maintainers before starting implementation.
 
 Please update the docs with any API changes, the code and docs should always be in sync.
 
-React documentation lives in `apps/docs/content/docs/{en,cn}/react`. Update both locales when changing APIs, defaults, setup instructions, or examples. Demo components live in `apps/docs/src/demos/{en,cn}` and import HeroUI explicitly; MDX helpers such as `ComponentPreview` are registered in `apps/docs/src/mdx-components.tsx`.
+React documentation lives in `apps/docs/content/docs/{en,cn}/react`. Update both locales when changing APIs, defaults, setup instructions, or examples. Demo components live in `apps/docs/src/demos/{en,cn}` and import wikialisa explicitly; MDX helpers such as `ComponentPreview` are registered in `apps/docs/src/mdx-components.tsx`.
 
 Before editing the docs app, read [`apps/docs/AGENTS.md`](apps/docs/AGENTS.md). Register new component pages in each locale's `components/meta.json` and in `apps/docs/src/components/components-category.tsx`. Use canonical `/docs/react/...` links in current guides.
 
@@ -255,7 +255,7 @@ Breaking changes should be accompanied with deprecations of removed functionalit
 
 ## Becoming a maintainer
 
-If you are interested in becoming a HeroUI maintainer, start by
+If you are interested in becoming a wikialisa maintainer, start by
 reviewing issues and pull requests. Answer questions for those in need of
 troubleshooting. Join us in the
 [Discord Community](https://discord.gg/9b6yyZKmH4) chat room.
@@ -266,7 +266,7 @@ best to be proactive in reaching out to those that are already helping out.
 GitHub by default does not publicly state that you are a member of the
 organization. Please feel free to change that setting for yourself so others
 will know who's helping out. That can be configured on the [organization
-list](https://github.com/orgs/heroui-inc/people) page.
+list](https://github.com/orgs/wikialisa-inc/people) page.
 
 Being a maintainer is not an obligation. You can help when you have time and be
 less active when you don't. If you get a new job and get busy, that's alright.
